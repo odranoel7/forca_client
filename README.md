@@ -1,1 +1,2 @@
-# meu_jogo_forca
+# jogo_forca
+Fazer o jogo da forca

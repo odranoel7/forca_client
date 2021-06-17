@@ -94,6 +94,11 @@
     color: rgba(204, 204, 204, 0.3);
   }
 
+  div.disabled {
+    pointer-events: none;
+    color: rgba(204, 204, 204, 0.3);
+  }
+
   .field-center{
     display: flex;
     flex-direction: column;
