@@ -21,38 +21,11 @@ var palavrasacertadas = {
   tres: false
 }
 
-ws.on('error', error => {
+/* ws.on('error', error => {
   alert('Erro -> '+error);
-});
+}); */
 
-function validar(palavra, numeroPalavra){
-  document.getElementById("plvcerta"+numeroPalavra).value = '';
-  if (document.getElementById("plv"+numeroPalavra).value == palavra.toUpperCase()) {
-    document.getElementById("palavra"+numeroPalavra).innerHTML = palavra;
-    if (numeroPalavra == 1){
-      palavrasacertadas.um = true;
-    } else if (numeroPalavra == 2){
-      palavrasacertadas.dois = true;
-    }  else if (numeroPalavra == 3){
-      palavrasacertadas.tres = true;
-    }
-    var auxEnviar = {
-      palavra:       palavra,
-      numeroPalavra: numeroPalavra,
-      selecao:       'palavras_acerto'
-    };
-    console.log(palavrasacertadas);
 
-    if ((palavrasacertadas.um == true) && (palavrasacertadas.dois == true) && (palavrasacertadas.tres == true)){
-      alert('acabou o jogo');
-    }
-
-    ws.send(JSON.stringify(auxEnviar));
-  } else{
-    alert('Errou a palavra');
-  }
-  
-}
 
 ws.on('message', function ponto(pontoRodada){
   var aux = JSON.parse(pontoRodada);
@@ -96,6 +69,35 @@ ws.on('message', function ponto(pontoRodada){
     document.getElementById("palavra3").innerHTML = aux.palavrasCorretaTres;
   }
 });
+
+function validar(palavra, numeroPalavra){
+  document.getElementById("plvcerta"+numeroPalavra).value = '';
+  if (document.getElementById("plv"+numeroPalavra).value == palavra.toUpperCase()) {
+    document.getElementById("palavra"+numeroPalavra).innerHTML = palavra;
+    if (numeroPalavra == 1){
+      palavrasacertadas.um = true;
+    } else if (numeroPalavra == 2){
+      palavrasacertadas.dois = true;
+    }  else if (numeroPalavra == 3){
+      palavrasacertadas.tres = true;
+    }
+    var auxEnviar = {
+      palavra:       palavra,
+      numeroPalavra: numeroPalavra,
+      selecao:       'palavras_acerto'
+    };
+    console.log(palavrasacertadas);
+
+    if ((palavrasacertadas.um == true) && (palavrasacertadas.dois == true) && (palavrasacertadas.tres == true)){
+      alert('acabou o jogo');
+    }
+
+    ws.send(JSON.stringify(auxEnviar));
+  } else{
+    alert('Errou a palavra');
+  }
+  
+}
 
 function montaPalavras(palavras){
   for(var i = 0; i< 3; i++){
